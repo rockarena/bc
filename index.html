@@ -219,8 +219,13 @@
                             <span class="mdl-textfield__error">Input is not a number!</span>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="target_sum">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
                             <label class="mdl-textfield__label">maximum days to reinvest</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="reinvest_every_x_days">
+                            <label class="mdl-textfield__label">reinvest every X days</label>
                             <span class="mdl-textfield__error">Input is not a number!</span>
                         </div>
                         <br/>
@@ -228,7 +233,7 @@
                         <span >
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
                                 <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investment">
-                                <label class="mdl-textfield__label" for="investment">Enter investing capital $ (required if maximum profit selected)</label>
+                                <label class="mdl-textfield__label" for="investment">Enter investing capital in $ (required if maximum profit selected)</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
                         </span>

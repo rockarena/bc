@@ -32,8 +32,14 @@
             float: left;
             border:none !important;
         }
+        .center-text{
+            text-align: center
+        }
         .red {
             color:red
+        }
+        .orange{
+            color: rgb(255,193,7) !important;
         }
         .green {
             color:green
@@ -95,12 +101,15 @@
             font-weight: bold;
             font-size:14px;
         }
+        .reinvest {
+            background-color:rgb(255,193,7)
+        }
     </style>
 </head>
 <body>
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col center-text">
-            <div class="typo-styles__demo mdl-typography--display-1"style="color: #ff8f00;">Bit Connect Calculator</div>
+            <div class="typo-styles__demo mdl-typography--display-1 orange">Bit Connect Calculator</div>
         </div>
     </div>
     <div class="mdl-grid">
@@ -249,7 +258,7 @@
                             <div class="mdc-select" role="listbox" tabindex="0">
                                 <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
                                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                                    <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" readonly tabIndex="-1">
+                                    <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" data-val="0" readonly tabIndex="-1">
                                     <label for="reinvest_period" class="mdl-textfield__label">every:</label>
                                     <ul for="reinvest_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                         <li class="mdl-menu__item" data-val="0">Daily</li>
@@ -262,7 +271,7 @@
                         </div>
                         <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
-                            <label class="mdl-textfield__label">maximum days to reinvest</label>
+                            <label class="mdl-textfield__label">maximum loans</label>
                             <span class="mdl-textfield__error">Input is not a number!</span>
                         </div>
                         <br/>

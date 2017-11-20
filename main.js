@@ -128,7 +128,7 @@ var app = {
 
 document.addEventListener("DOMContentLoaded", function(event) {
     // init date
-    app.user_input.start_date.html(moment().format("MMM Do YYYY"));
+    app.user_input.start_date.html(moment().format("MMM Do YYYY") + ' (today)');
     var picker = new MaterialDatetimePicker()
     .on('submit', function(val){
         

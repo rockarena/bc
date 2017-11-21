@@ -15,7 +15,7 @@ var app = {
         summary_table: $("#summary_table")
     },
     toggle_view:function(e){
-        $('.details').toggle();
+        $('.details').toggle({duration:300,easing:'linear'});
         e.innerHTML = e.innerHTML == 'Show All' ? 'Filter Loans' : 'Show All'
     },
     get_interest:function(i){
@@ -51,6 +51,7 @@ var app = {
         }
     },
     show_results: function(){
+        $('.link-text').text('Filter Loans');
         var p = parseFloat(app.user_input.investment.val());
         var days = app._get_days(parseInt(p));
         var interest = 0.01;
@@ -281,19 +282,20 @@ var app = {
             <td> 
                 <span id="end_date" class="left-text bold-font">
                 ${moment(app.data.start_date).format("MMM Do YYYY")} - 
-                ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")} (${days} days)
+                ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")} <span class='orange'>(${days} days)</span>
                 </span>
             </td>
         </tr>
         <tr>   
             <td>
-                <span class="mdl-data-table__cell--non-numeric">Investment:&nbsp;</span>
+                <span class="mdl-data-table__cell--non-numeric">1st Investment:&nbsp;</span>
             </td>
             <td>
                 <span id="show_investment" class="left-text bold-font">$${p}
                 </span>
             </td>
-        </tr>
+        </tr>`
+        lending_info =`
         <tr>   
             <td>
                 <span class="mdl-data-table__cell--non-numeric">Lending:&nbsp;</span>
@@ -303,9 +305,8 @@ var app = {
                 </span>
             </td>
         </tr>`;
-        
 
-        app.ui.summary_table.html(common_summary + summary_one + summary_two);
+        app.ui.summary_table.html(common_summary + summary_one + summary_two + lending_info);
 
         output = "";
         for (var i=0; i<a.length; i++){
@@ -330,10 +331,11 @@ var app = {
                 `
             }
         }
-        
+    
         app.ui.results_table_body.html(output);
         app.ui.results_table.show();
-        app.ui.results_table[0].scrollIntoView();
+        $('body').animate({scrollTop: app.ui.results_table.offset().top},'slow');
+        // app.ui.results_table[0].scrollIntoView();
         
     },
     show_selected_date: function(val){

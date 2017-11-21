@@ -14,6 +14,10 @@ var app = {
         results_table_body: $("#results_table_body"),
         summary_table: $("#summary_table")
     },
+    toggle_view:function(e){
+        $('.details').toggle();
+        e.innerHTML = e.innerHTML == 'Show All' ? 'Filter Loans' : 'Show All'
+    },
     get_interest:function(i){
         if (i<=1010)
             return 0.011
@@ -306,7 +310,7 @@ var app = {
         output = "";
         for (var i=0; i<a.length; i++){
             output += `
-            <tr ${a[i][2] !=0 || i==0 ? 'class="reinvest"': ""}>
+            <tr ${a[i][2] !=0 || i==0 ? 'class="reinvest"': "class='details'"}>
                 <td>${i}</td>
                 <td class="mdl-data-table__cell--non-numeric">${moment(a[i][0]).format("MMM Do YYYY")}</td>
                 <td>$${a[i][1]}</td>
@@ -316,10 +320,10 @@ var app = {
             `;
             if (a[i][2]!=0 || i==0){
                 output +=`
-                <tr>
-                    <td colspan=5 class="reinvest">
+                <tr class="reinvest">
+                    <td colspan=5>
                         <div class="bold-font center-text">Loan release date: 
-                            ${moment(a[i][0]).add(app._get_days(a[i][2]),'days').format("MMM Do YYYY")}
+                            ${moment(a[i][0]).add(app._get_days(a[i][2]!=0   ? a[i][2] : a[i][1]),'days').format("MMM Do YYYY")}
                         </div>
                     </td>
                 </tr>

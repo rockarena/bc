@@ -164,6 +164,8 @@ var app = {
                         <br/> 
                         From ${moment(app.data.start_date).format("MMM Do YYYY")} To 
                         ${moment(app.data.start_date).add(target_reached,'days').format("MMM Do YYYY")}
+                        <br/>
+                        $${a[target_reached][1]} in Lendings
                         </div>
                     </td>
                 </tr>`;
@@ -190,11 +192,11 @@ var app = {
                 </tr>
                 <tr>
                     <td>
-                        <span class="mdl-data-table__cell--non-numeric">${app.user_input.roi_period.val()} sum of :</span>        
+                        <span class="mdl-data-table__cell--non-numeric">${app.user_input.roi_period.val()} pay :</span>        
                     </td>
                     <td>
                         <span class="left-text bold-font">
-                            $${a[target_reached + selected_period][3]}
+                            $${a[target_reached + selected_period -1 ][3]} (durig period of ${days - target_reached} days)
                         </span>
                         </td>
                 </tr>`;

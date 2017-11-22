@@ -115,7 +115,7 @@ var app = {
                     </td>
                 </tr> `;   
         }
-
+        // Todo: monthly bug fix
         if (option == 2){
             var target_reached = 0;
             var daily_target = parseInt(app.user_input.target_sum.val()) / parseInt(app.user_input.roi_period.attr("data-val"));

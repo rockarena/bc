@@ -1,0 +1,129 @@
+html, body {
+    line-height: normal;
+}
+.center-text {
+    text-align: center
+}
+.right-text {
+    text-align: right;
+}
+.left-text {
+    text-align: left;
+    float: left;
+    border:none !important;
+}
+.center-text{
+    text-align: center
+}
+.red {
+    color:red
+}
+.orange{
+    color: rgb(255,193,7) !important;
+}
+.green {
+    color:#1d901d
+}
+.mdl-radio {
+    display: block
+}
+
+ul{
+    overflow: initial !important
+}
+.demo-card-wide.mdl-card {
+    width: 512px;
+}
+.getting-paid { 
+    /* margin-top: -40px */
+    
+}
+.sum {
+    /* font-size: 16px;
+    line-height: 24px;
+    font-weight: bold;display:inline-block ;
+    margin-bottom:60px; */
+    
+    margin-top: -40px;
+    /* margin-left: 130px; */
+}
+.sum2 {
+    margin-top: -38px;
+}
+.margin-top-20{
+    margin-top: 20px;
+    padding-left: 15px;
+}
+.getmdl-select .mdl-menu__container {
+    overflow: inherit !important;
+}
+
+.demo-card-wide > .mdl-card__actions {
+    display: flex;
+}
+
+.c-scrim--shown{
+    z-index: 4;
+}
+.c-datepicker--open{
+    z-index: 5;
+}
+
+.c-datepicker__day-body{
+    text-align: center !important;
+}
+body {
+    background-image: url('b1.png');
+    background-color: rgb(248, 248, 248);
+}
+.bold-font{
+    font-weight: bold;
+    font-size:14px;
+}
+.reinvest {
+    background-color:rgb(255,193,7)
+}
+.link-text{
+    cursor: pointer;
+    color: black;
+    margin-top: -40px;
+    /* text-decoration: underline; */
+}
+.filter-results{
+    cursor: pointer;
+    color: black;
+    margin-top: -40px;
+    float:right;
+    margin: 0 10px 10px 0;
+}
+.terms{
+    margin-left: 60px;
+    margin-top: -10px;
+}
+label.demo-list-radio.mdl-radio{
+    margin-top:20px
+}
+.center-list{
+    margin: 0 auto;
+}
+.width-100{
+    width:100%
+}
+.bggreen{
+    background-color:green;
+}
+.bgred{
+    background-color:#f36200;
+}
+.white{
+    color: white;
+}
+.c-datepicker__header-date{
+    background:#d46d00
+}
+.c-datepicker__header-day{
+    background: #ac5e0b;
+}
+.u-hover-ball-effect:hover:before, .c-datepicker__day-body:hover:before, .c-datepicker__clock__num:hover:before{
+    background: #d46d00
+}

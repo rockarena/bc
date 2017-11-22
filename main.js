@@ -55,6 +55,10 @@ var app = {
         var p = parseFloat(app.user_input.investment.val());
         var days = app._get_days(parseInt(p));
         var interest = 0.01;
+        var goal_reached = '';
+        var lending = 0;
+        var common_summary = '';
+        var lending_info = ''
         // var n=365;
         // var years = days / 365;
         // var roi = p* Math.pow((1 + interest / n), n*(years));
@@ -94,7 +98,7 @@ var app = {
             summary_one = `
                 <tr>
                     <td>
-                        <span class="mdl-data-table__cell--non-numeric">ROI:&nbsp;</span>
+                        <span class="mdl-data-table__cell--non-numeric">Profit:&nbsp;</span>
                     </td>
                     <td>
                         <span id="roi" class="left-text bold-font">$${roi}
@@ -103,7 +107,7 @@ var app = {
                 </tr>
                 <tr>
                     <td>
-                        <span class="mdl-data-table__cell--non-numeric">Investment + ROI:</span>
+                        <span class="mdl-data-table__cell--non-numeric">Loan + Profit:</span>
                     </td>
                     <td>
                         <span id="roii" class="left-text bold-font">$${roii}
@@ -120,7 +124,7 @@ var app = {
             for (var i=1;i<days+1;i++){
                 var prev_investment = parseFloat(a[i-1][1]);
                 var day_roi = prev_investment * interest;
-                if (daily_target > day_roi){
+                if (daily_target >= day_roi){
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
                         parseFloat(prev_investment + day_roi).toFixed(2),
@@ -147,40 +151,54 @@ var app = {
             lending = a[a.length-1][1];
             roi = parseFloat(a[a.length-1][2]) > 0 ? 0 : a[a.length-1][3];
             roii = (parseFloat(roi) + p).toFixed(2);
+            
 
+            
             if (target_reached){
                 var summary_two = `
-                <tr>   
-                    <td>
-                        <span class="mdl-data-table__cell--non-numeric green">Goal:</span>
-                    </td>
-                    <td>
-                        <span id="show_investment" class="green left-text bold-font">
-                        reached in ${target_reached} days on ${moment(app.data.start_date).add(target_reached,'days').format("MMM Do YYYY")}
-                        </span>
-                    </td>
-                </tr>
-                <tr>   
-                    <td>
-                        <span class="mdl-data-table__cell--non-numeric">Reinvesting Period:</span>
-                    </td>
-                    <td>
-                        <span id="show_investment" class="left-text bold-font">
-                        ${moment(app.data.start_date).format("MMM Do YYYY")} - 
-                        ${moment(app.data.start_date).add(target_reached,'days').format("MMM Do YYYY")} (${target_reached} days)
-                        </span>
+                <tr class="reinvest">   
+                    <td colspan=2>
+                        <div id="show_investment" class="center-text bold-font">
+                        Daily lending for
+                        ${target_reached} days
+                        <br/> 
+                        From ${moment(app.data.start_date).format("MMM Do YYYY")} To 
+                        ${moment(app.data.start_date).add(target_reached,'days').format("MMM Do YYYY")}
+                        </div>
                     </td>
                 </tr>`;
+                let selected_period = parseInt(app.user_input.roi_period.attr("data-val"));
+                goal_reached = `
+                <tr>   
+                    <td colspan=2>
+                        <div id="show_investment" class="left-text bold-font center-text width-100">
+                            Goal reached, in ${target_reached + selected_period} days (from starting date).
+                            <br>
+                            First ${app.user_input.roi_period.val()} payment on ${
+                            moment(app.data.start_date)
+                            .add(target_reached + selected_period,'days')
+                            .format("MMM Do YYYY")}
+                            
+                        </div>
+                    </td>
+                </tr>
+                <!--<tr>
+                    <td colspan=2>
+                        First ${app.user_input.roi_period.val()} Payment on ${
+                            moment(app.data.start_date)
+                            .add(target_reached + parseInt(app.user_input.roi_period.attr("data-val")),'days')
+                            .format("MMM Do YYYY")
+                        }
+                    </td>
+                </tr>-->
+                `;
             }
             if (!target_reached){
                 var summary_two = `
-                <tr>
-                    <td>
-                        <span class="mdl-data-table__cell--non-numeric red">Goal:</span>
-                    </td>               
-                    <td >  
-                    <div id="show_investment" class="left-text red">  
-                            Not reached. Try djusting the return or the investment.
+                <tr>       
+                    <td colspan=2 class="red bgred">  
+                    <div id="show_investment" class="left-text white center-text width-100 bold-font">  
+                            Goal Not reached Try adjusting the periodical profit or the 1st loan.
                             </div>
                     </td>
                 </tr>
@@ -195,7 +213,7 @@ var app = {
         if (option == 3){
             var target_reached = 0;
             var reinvesting_amount = parseInt(app.user_input.reinvest_period.attr("data-val"));
-            var max_days = app.user_input.max_reinvesting_days.val() ? parseInt(app.user_input.max_reinvesting_days.val())-1 : -1;
+            var max_days = app.user_input.max_reinvesting_days.val() ? parseInt(app.user_input.max_reinvesting_days.val()) : -1;
             var sum = 0;
             var sum_roi = 0;
             var loans = 0;
@@ -254,59 +272,77 @@ var app = {
 
             summary_one = `
             <tr>
+            <td>
+                <span class="mdl-data-table__cell--non-numeric">Lending Period:&nbsp;</span>
+            </td>
+            <td> 
+                <span id="end_date" class="left-text bold-font">
+                ${days} days - 
+                ${moment(app.data.start_date).format("MMM Do YYYY")} - 
+                ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")}
+                </span>
+            </td>
+        </tr>
+            <tr>
                 <td>
-                    <span class="mdl-data-table__cell--non-numeric">ROI:&nbsp;</span>
+                    <span class="mdl-data-table__cell--non-numeric">Profit :&nbsp;</span>
                 </td>
                 <td>
                     <span id="roi" class="left-text bold-font">$${roi}
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <span class="mdl-data-table__cell--non-numeric">Investment + ROI:</span>
-                </td>
-                <td>
-                    <span id="roii" class="left-text bold-font">$${roii}
-                    </span>
-                </td>
-            </tr> `;  
+            `;  
 
         }
         
-        var common_summary = `
-        <tr>
-            <td>
-                <span class="mdl-data-table__cell--non-numeric">Period:&nbsp;</span>
-            </td>
-            <td> 
-                <span id="end_date" class="left-text bold-font">
-                ${moment(app.data.start_date).format("MMM Do YYYY")} - 
-                ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")} <span class='orange'>(${days} days)</span>
-                </span>
-            </td>
-        </tr>
-        <tr>   
-            <td>
-                <span class="mdl-data-table__cell--non-numeric">1st Investment:&nbsp;</span>
-            </td>
-            <td>
-                <span id="show_investment" class="left-text bold-font">$${p}
-                </span>
-            </td>
-        </tr>`
-        lending_info =`
-        <tr>   
-            <td>
-                <span class="mdl-data-table__cell--non-numeric">Lending:&nbsp;</span>
-            </td>
-            <td>
-                <span id="show_investment" class="left-text bold-font">$${lending} <span class='orange'>(${loans+1} loans)</span>
-                </span>
-            </td>
-        </tr>`;
-
-        app.ui.summary_table.html(common_summary + summary_one + summary_two + lending_info);
+        if (option == 1){
+        common_summary = `
+            <tr>
+                <td>
+                    <span class="mdl-data-table__cell--non-numeric">Lending Period :&nbsp;</span>
+                </td>
+                <td> 
+                    <span id="end_date" class="left-text bold-font">
+                    ${days} days - 
+                    ${moment(app.data.start_date).format("MMM Do YYYY")} - 
+                    ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")}
+                    </span>
+                </td>
+            </tr>
+            <tr>   
+                <td>    
+                    <span class="mdl-data-table__cell--non-numeric">Loan:&nbsp;</span>
+                </td>
+                <td>
+                    <span id="show_investment" class="left-text bold-font">$${p}
+                    </span>
+                </td>
+            </tr>`
+        }
+        if (loans && option==3){
+            lending_info =`
+            <tr>   
+                <td>
+                    <span class="mdl-data-table__cell--non-numeric">Total Lending :&nbsp;</span>
+                </td>
+                <td>
+                    <div class="left-text bold-font">
+                    $${lending}
+                    </div>
+                </td>
+            <tr>
+                <td>
+                    <span class="mdl-data-table__cell--non-numeric">Active Loans :&nbsp;</span>
+                </td>
+                <td>
+                    <div class="left-text bold-font">
+                    ${loans}
+                    </div>
+                </td>
+            </tr>`;
+        }
+        app.ui.summary_table.html(goal_reached + summary_two + common_summary + summary_one + lending_info);
 
         output = "";
         for (var i=0; i<a.length; i++){
@@ -320,10 +356,11 @@ var app = {
             </tr>
             `;
             if (a[i][2]!=0 || i==0){
+                let loanRelease = i==0 ? (a[i][1] + ' Initial') : a[i][2];
                 output +=`
                 <tr class="reinvest">
                     <td colspan=5>
-                        <div class="bold-font center-text">Loan release date: 
+                        <div class="bold-font center-text">$${loanRelease} Loan, release date : 
                             ${moment(a[i][0]).add(app._get_days(a[i][2]!=0   ? a[i][2] : a[i][1]),'days').format("MMM Do YYYY")}
                         </div>
                     </td>

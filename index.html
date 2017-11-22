@@ -42,7 +42,7 @@
             color: rgb(255,193,7) !important;
         }
         .green {
-            color:green
+            color:#1d901d
         }
         .mdl-radio {
             display: block
@@ -65,15 +65,14 @@
             margin-bottom:60px; */
             
             margin-top: -40px;
-            margin-left: 130px;
+            /* margin-left: 130px; */
         }
         .sum2 {
-            
-            margin-top: -20px;
-            margin-left: 130px;
+            margin-top: -38px;
         }
         .margin-top-20{
             margin-top: 20px;
+            padding-left: 15px;
         }
         .getmdl-select .mdl-menu__container {
             overflow: inherit !important;
@@ -110,6 +109,35 @@
             margin-top: -40px;
             /* text-decoration: underline; */
         }
+        .filter-results{
+            cursor: pointer;
+            color: black;
+            margin-top: -40px;
+            float:right;
+            margin: 0 10px 10px 0;
+        }
+        .terms{
+            margin-left: 60px;
+            margin-top: -10px;
+        }
+        label.demo-list-radio.mdl-radio{
+            margin-top:20px
+        }
+        .center-list{
+            margin: 0 auto;
+        }
+        .width-100{
+            width:100%
+        }
+        .bggreen{
+            background-color:green;
+        }
+        .bgred{
+            background-color:#f36200;
+        }
+        .white{
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -118,10 +146,9 @@
             <div class="typo-styles__demo mdl-typography--display-1 orange">Bit Connect Calculator</div>
         </div>
     </div>
-    <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col"></div>
-        <div class="mdl-cell mdl-cell--4-col">
-            <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin:0 auto">
+    <div>
+        <div class="mdl-list">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
                 <div>
                     <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
                         <thead>
@@ -160,30 +187,8 @@
                         daily interest history
                     </a> -->
                 </div>
-                <!--   <div class="mdl-card__supporting-text">
-                    <div class="mdl-card__title"> 
-                        <span> <h2 class="mdl-card__title-text">Investing</h2></span> 
-                        
-                    </div>
-                    
-                    <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
-                        <label class="mdl-textfield__label" for="sample4">In Loans...</label>
-                        <span class="mdl-textfield__error">Input is not a number!</span>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
-                        <label class="mdl-textfield__label" for="sample4">In BCC Wallet</label>
-                        <span class="mdl-textfield__error">Input is not a number!</span>
-                    </div>
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
-                        <label class="mdl-textfield__label" for="sample4">In BTC Wallet...</label>
-                        <span class="mdl-textfield__error">Input is not a number!</span>
-                    </div>
-                </div>-->
                 <div class="mdl-card__title mdl-card--expand">
-                    <div class="mdl-list">
+                    <div class="mdl-list center-list">
                         <div class="mdl-list__item">
                             <span class="mdl-card__title-text">Starting:&nbsp;</span>
                             <span id="start_date" class="mdl-card__title-text">
@@ -202,84 +207,78 @@
         </div>
     </div>
 </div>
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col"></div>
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin:0 auto">
+<div>
+    <div class="mdl-list">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
             <div class="mdl-card__supporting-text">
                 <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Setting your goal</h2></div>
                 <div class="margin-top-20">
                     <span >
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investment">
-                            <label class="mdl-textfield__label" for="investment">Enter investing capital in $USD </label>
+                            <label class="mdl-textfield__label" for="investment">Enter your 1st loan amount in $USD </label>
                             <span class="mdl-textfield__error">Input is not a number!</span>
                         </div>
                     </span>
-                    <br>
-                    <br>
-                    <br>
+
                     <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
                         <input type="radio" id="list-option-1" class="radio mdl-radio__button" name="goal-options" value="1" checked />
-                        <span class="mdl-radio__label">Profit from capital <span>(no reinvesting)</span></span>
-                    </label>  
+                        <span class="mdl-radio__label">Profit from this loan</span>
+                    </label>
                     <div class="getting-paid">
                         <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2" style="display:inline-block">
                             <input type="radio" id="list-option-2" class="radio mdl-radio__button" name="goal-options" value="2" />
-                            <span class="mdl-radio__label">Getting Paid &nbsp;&nbsp;</span>
+                            <span class="mdl-radio__label">Periodical profit</span>
                         </label>  
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <div class="mdc-select" role="listbox" tabindex="0">
-                                <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                                    <input class="mdl-textfield__input" type="text" id="roi_period" value="Weekly" data-val="7" readonly tabIndex="-1">
-                                    <label for="roi_period" class="mdl-textfield__label">select period:</label>
-                                    <ul for="roi_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                        <li class="mdl-menu__item" data-val="1">Daily</li>
-                                        <li class="mdl-menu__item" data-val="7">Weekly</li>
-                                        <li class="mdl-menu__item" data-val="30.42">Monthly</li>
-                                    </ul>
+                        <div class="terms">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <div class="mdc-select" role="listbox" tabindex="0">
+                                    <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                                        <input class="mdl-textfield__input" type="text" id="roi_period" value="Weekly" data-val="7" readonly tabIndex="-1">
+                                        <label for="roi_period" class="mdl-textfield__label">select period:</label>
+                                        <ul for="roi_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                            <li class="mdl-menu__item" data-val="1">Daily</li>
+                                            <li class="mdl-menu__item" data-val="7">Weekly</li>
+                                            <li class="mdl-menu__item" data-val="30.42">Monthly</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="mdl-textfield mdl-js-textfield sum mdl-textfield--floating-label" >   
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="target_sum">
+                                <label class="mdl-textfield__label">$USD</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
                         </div>
-                        <!-- <label class="sum mdl-js-ripple-effect">
-                            The sum of
-                        </label>                                 -->
-                        <div class="mdl-textfield mdl-js-textfield sum mdl-textfield--floating-label" >   
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="target_sum">
-                            <label class="mdl-textfield__label">$USD</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
-                        <!-- <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="reinvest_every_x_days">
-                            <label class="mdl-textfield__label">reinvest each $</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div> -->
-
+                        
                         <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3" style="display:inline-block">
                             <input type="radio" id="list-option-3" class="radio mdl-radio__button" name="goal-options" value="3" />
-                            <span class="mdl-radio__label">Reinvesting &nbsp;&nbsp;&nbsp;</span>
+                            <span class="mdl-radio__label">Lend periodically from profit</span>
                         </label>  
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <div class="mdc-select" role="listbox" tabindex="0">
-                                <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                                    <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" data-val="0" readonly tabIndex="-1">
-                                    <label for="reinvest_period" class="mdl-textfield__label">every:</label>
-                                    <ul for="reinvest_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-                                        <li class="mdl-menu__item" data-val="0">Daily</li>
-                                        <li class="mdl-menu__item" data-val="1010">$1010</li>
-                                        <li class="mdl-menu__item" data-val="5010">$5010</li>
-                                        <li class="mdl-menu__item" data-val="10010">$10010</li>
-                                    </ul>
+                        <div class="terms">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <div class="mdc-select" role="listbox" tabindex="0">
+                                    <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                                        <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" data-val="0" readonly tabIndex="-1">
+                                        <label for="reinvest_period" class="mdl-textfield__label">every:</label>
+                                        <ul for="reinvest_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                            <li class="mdl-menu__item" data-val="0">Daily</li>
+                                            <li class="mdl-menu__item" data-val="1010">$1010</li>
+                                            <li class="mdl-menu__item" data-val="5010">$5010</li>
+                                            <li class="mdl-menu__item" data-val="10010">$10010</li>
+                                        </ul>
+                                    </div>
                                 </div>
+                            </div>    
+                            <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
+                                <label class="mdl-textfield__label">maximum loans</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
                         </div>
-                        <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
-                            <label class="mdl-textfield__label">maximum loans</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
+
                         <br/>
                         <br/>
                         
@@ -297,60 +296,10 @@
     </div>
 </div>
 
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--4-col"></div>
-    
-    <div class="mdl-cell mdl-cell--4-col">
-        <!-- <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin:0 auto">
-            <div class="mdl-card__title mdl-card--expand">
-                <div class="mdl-list">
-                    <div class="mdl-list__item">
-                        <span class="typo-styles__demo mdl-typography--headline">Start Date:&nbsp;</span>
-                        <div id="start_date" class="typo-styles__demo mdl-typography--headline">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <button class="c-datepicker-btn mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect">
-                    Choose Starting Date
-                </button>
-                <div class="mdl-layout-spacer"></div>
-                <i class="material-icons">event</i>
-            </div>
-        </div> -->
-        <!-- <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin:0 auto">
-            <div class="mdl-card__supporting-text">
-                \                    <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Advanced Options</h2></div>
-                <div class="margin-top-20">
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
-                        <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
-                        <span class="mdl-checkbox__label">Reaching goal and then getting periodically paid</span>
-                    </label>
-                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-                        <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input">
-                        <span class="mdl-checkbox__label">Getting periodically paid while reaching goal</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-    </div> -->
-</div>
-<div class="mdl-cell mdl-cell--4-col"></div>
-</div>
-
-<!-- <div class="mdl-grid">
-    <div class="center-text mdl-cell mdl-cell--12-col">
-        <button onclick="app.show_results();" style="position:relative;bottom:0;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-            Show Results <i class="material-icons md-24">navigate_next</i>
-        </button>
-    </div>
-</div> -->
-<div class="mdl-grid" id="results_table" style="display:none">
-    <div class="mdl-cell mdl-cell--4-col"></div>
-    <div class="mdl-cell mdl-cell--4-col">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp" style="margin:0 auto">
-            <div class="mdl-card__supporting-text">
+<div id="results_table" style="display:none">
+    <div class="mdl-list">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
+            <div class="">
                 <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Result summary</h2></div>
             </div>
             
@@ -363,7 +312,11 @@
             <div class="mdl-card__supporting-text">
                 <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Result details</h2></div>
             </div>
-            <div class="mdl-card__supporting-text  link-text right-text" onclick="app.toggle_view(this)">Filter Loans</div>
+            <div class="snippet-demo-container demo-button demo-button__raised">
+                <button class="mdl-button mdl-js-button mdl-button--raised filter-results" onclick="app.toggle_view(this)">
+                    Filter Loans
+                </button>
+            </div>
             <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
                 <thead>
                     <tr>
@@ -371,7 +324,7 @@
                         <th class="mdl-data-table__cell--non-numeric">Date</th>
                         <th>Lending</th>
                         <th>Reinvest</th>
-                        <th>ROI</th>
+                        <th>Profit</th>
                     </tr>
                 </thead>
                 <tbody id="results_table_body">
@@ -379,27 +332,6 @@
             </table>
         </div>
     </div>
-    <div class="mdl-cell mdl-cell--4-col"></div>
-    
-</div>
-<div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet"></div>
-    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
-        <!-- <table style="width:100%; display:none" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="results_table">
-            <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Date</th>
-                    <th>Lending</th>
-                    <th>Reinvest</th>
-                    <th>Lending Wallet</th>
-                </tr>
-            </thead>
-            <tbody id="results_table_body">
-            </tbody>
-        </table> -->
-        
-    </div>
-    <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet"></div>
 </div>
 <script src="main.js" charset="utf-8"></script>
 </body>

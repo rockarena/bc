@@ -170,28 +170,34 @@ var app = {
                 let selected_period = parseInt(app.user_input.roi_period.attr("data-val"));
                 goal_reached = `
                 <tr>   
-                    <td colspan=2>
-                        <div id="show_investment" class="left-text bold-font center-text width-100">
-                            Goal reached, in ${target_reached + selected_period} days (from starting date).
-                            <br>
-                            First ${app.user_input.roi_period.val()} payment on ${
-                            moment(app.data.start_date)
-                            .add(target_reached + selected_period,'days')
-                            .format("MMM Do YYYY")}
-                            
-                        </div>
+                    <td>
+                       <span class="mdl-data-table__cell--non-numeric">Goal reached in : </span>
+                    </td>
+                    <td><span class="left-text bold-font">${target_reached + selected_period} days (from starting date)</span>
                     </td>
                 </tr>
-                <!--<tr>
-                    <td colspan=2>
-                        First ${app.user_input.roi_period.val()} Payment on ${
-                            moment(app.data.start_date)
-                            .add(target_reached + parseInt(app.user_input.roi_period.attr("data-val")),'days')
-                            .format("MMM Do YYYY")
-                        }
+                <tr>
+                    <td>
+                        <span class="mdl-data-table__cell--non-numeric">First ${app.user_input.roi_period.val()} payment on :</span>        
                     </td>
-                </tr>-->
-                `;
+                    <td>
+                        <span class="left-text bold-font">
+                            ${moment(app.data.start_date)
+                            .add(target_reached + selected_period,'days')
+                            .format("MMM Do YYYY")}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="mdl-data-table__cell--non-numeric">${app.user_input.roi_period.val()} sum of :</span>        
+                    </td>
+                    <td>
+                        <span class="left-text bold-font">
+                            $${a[target_reached + selected_period][3]}
+                        </span>
+                        </td>
+                </tr>`;
             }
             if (!target_reached){
                 var summary_two = `

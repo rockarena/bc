@@ -16,7 +16,7 @@ var app = {
     },
     toggle_view:function(e){
         $('.details').toggle({duration:300,easing:'linear'});
-        e.innerHTML = e.innerHTML == 'Show All' ? 'Filter Loans' : 'Show All'
+        e.innerHTML = e.innerHTML == 'Show All' ? 'Filter Investments' : 'Show All'
     },
     get_interest:function(i){
         if (i<=1010)
@@ -118,13 +118,16 @@ var app = {
         // Todo: monthly bug fix
         if (option == 2){
             var target_reached = 0;
-            var daily_target = parseInt(app.user_input.target_sum.val()) / parseInt(app.user_input.roi_period.attr("data-val"));
+            var target_days = parseInt(app.user_input.roi_period.attr("data-val"))
+            var target_sum = parseInt(app.user_input.target_sum.val())
+            var daily_target = target_sum / target_days;
             var sum2 = 0;
             var loans = 0;
-            for (var i=1;i<days+1;i++){
+            var day_roi = 0;
+            for (var i=1;target_sum>sum2;i++){
                 var prev_investment = parseFloat(a[i-1][1]);
-                var day_roi = prev_investment * interest;
-                if (daily_target >= day_roi){
+                day_roi = prev_investment * interest;
+                if (target_sum >= prev_investment * interest * target_days ){
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
                         parseFloat(prev_investment + day_roi).toFixed(2),
@@ -133,9 +136,6 @@ var app = {
                     ]);
                     loans++;
                 } else {
-                    if (!target_reached) {
-                        target_reached = i;
-                    }
                     sum2 +=day_roi;
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
@@ -143,6 +143,7 @@ var app = {
                         0,
                         sum2.toFixed(2)
                     ]) 
+                    target_reached = i
                     // break;
                 }
                
@@ -175,7 +176,7 @@ var app = {
                     <td>
                        <span class="mdl-data-table__cell--non-numeric">Goal reached in : </span>
                     </td>
-                    <td><span class="left-text bold-font">${target_reached + selected_period} days (from starting date)</span>
+                    <td><span class="left-text bold-font">${target_reached} days (from starting date)</span>
                     </td>
                 </tr>
                 <tr>
@@ -185,18 +186,18 @@ var app = {
                     <td>
                         <span class="left-text bold-font">
                             ${moment(app.data.start_date)
-                            .add(target_reached + selected_period,'days')
+                            .add(target_reached,'days')
                             .format("MMM Do YYYY")}
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <span class="mdl-data-table__cell--non-numeric">${app.user_input.roi_period.val()} pay :</span>        
+                        <span class="mdl-data-table__cell--non-numeric">First ${app.user_input.roi_period.val()} pay :</span>        
                     </td>
                     <td>
                         <span class="left-text bold-font">
-                            $${a[target_reached + selected_period -1 ][3]} (durig period of ${days - target_reached} days)
+                            $${a[target_reached][3]}
                         </span>
                         </td>
                 </tr>`;
@@ -364,7 +365,7 @@ var app = {
             </tr>
             `;
             if (a[i][2]!=0 || i==0){
-                let loanRelease = i==0 ? (a[i][1] + ' Initial') : a[i][2];
+                let loanRelease = i==0 ? (a[i][1] + ' First') : a[i][2];
                 output +=`
                 <tr class="reinvest">
                     <td colspan=5>

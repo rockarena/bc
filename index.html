@@ -94,19 +94,19 @@
                     <span >
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investment">
-                            <label class="mdl-textfield__label" for="investment">Enter your 1st loan amount in $USD </label>
+                            <label class="mdl-textfield__label" for="investment">Enter your first investment in $USD </label>
                             <span class="mdl-textfield__error">Input is not a number!</span>
                         </div>
                     </span>
 
                     <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
                         <input type="radio" id="list-option-1" class="radio mdl-radio__button" name="goal-options" value="1" checked />
-                        <span class="mdl-radio__label">Profit from this loan</span>
+                        <span class="mdl-radio__label">No reinvesting</span>
                     </label>
                     <div class="getting-paid">
                         <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2" style="display:inline-block">
                             <input type="radio" id="list-option-2" class="radio mdl-radio__button" name="goal-options" value="2" />
-                            <span class="mdl-radio__label">Periodical profit</span>
+                            <span class="mdl-radio__label">Withdraw</span>
                         </label>  
                         <div class="terms">
                             <div class="mdl-textfield mdl-js-textfield">
@@ -132,15 +132,20 @@
                         
                         <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3" style="display:inline-block">
                             <input type="radio" id="list-option-3" class="radio mdl-radio__button" name="goal-options" value="3" />
-                            <span class="mdl-radio__label">Lend periodically from profit</span>
+                            <span class="mdl-radio__label">Reach investment target of</span>
                         </label>  
                         <div class="terms">
-                            <div class="mdl-textfield mdl-js-textfield">
+                            <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" style="margin-top:10px" >   
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
+                                <label class="mdl-textfield__label">$USD</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield" style="margin-top:-20px">
                                 <div class="mdc-select" role="listbox" tabindex="0">
                                     <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
                                         <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" data-val="0" readonly tabIndex="-1">
-                                        <label for="reinvest_period" class="mdl-textfield__label">every:</label>
+                                        <label for="reinvest_period" class="mdl-textfield__label">choose reinvestment strategy:</label>
                                         <ul for="reinvest_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                             <li class="mdl-menu__item" data-val="0">Daily</li>
                                             <li class="mdl-menu__item" data-val="1010">$1010</li>
@@ -150,18 +155,14 @@
                                     </div>
                                 </div>
                             </div>    
-                            <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" >   
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
-                                <label class="mdl-textfield__label">maximum loans</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
-                            </div>
+
                         </div>
 
                         <br/>
                         <br/>
                         
                     </div>
-                    <div class="center-text mdl-cell mdl-cell--12-col">
+                    <div class="center-text mdl-cell mdl-cell--12-col" style="padding-bottom:40px">
                         <br/>
                         <br/>
                         <button onclick="app.show_results();" style="position:relative;bottom:0;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
@@ -192,7 +193,7 @@
             </div>
             <div class="snippet-demo-container demo-button demo-button__raised">
                 <button class="mdl-button mdl-js-button mdl-button--raised filter-results" onclick="app.toggle_view(this)">
-                    Filter Loans
+                    Filter Investments
                 </button>
             </div>
             <table class="mdl-data-table mdl-js-data-table" style="width:100%;">

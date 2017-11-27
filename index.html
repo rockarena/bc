@@ -136,7 +136,7 @@
                         </label>  
                         <div class="terms">
                             <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" style="margin-top:10px" >   
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="max_reinvesting_days">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investing_target">
                                 <label class="mdl-textfield__label">$USD</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -144,9 +144,9 @@
                                 <div class="mdc-select" role="listbox" tabindex="0">
                                     <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
-                                        <input class="mdl-textfield__input" type="text" id="reinvest_period" value="Daily" data-val="0" readonly tabIndex="-1">
-                                        <label for="reinvest_period" class="mdl-textfield__label">choose reinvestment strategy:</label>
-                                        <ul for="reinvest_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                        <input class="mdl-textfield__input" type="text" id="reinvesting_strategy" value="Daily" data-val="0" readonly tabIndex="-1">
+                                        <label for="reinvesting_strategy" class="mdl-textfield__label">choose reinvestment strategy:</label>
+                                        <ul for="reinvesting_strategy" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
                                             <li class="mdl-menu__item" data-val="0">Daily</li>
                                             <li class="mdl-menu__item" data-val="1010">$1010</li>
                                             <li class="mdl-menu__item" data-val="5010">$5010</li>

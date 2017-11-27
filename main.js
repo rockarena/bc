@@ -5,9 +5,9 @@ var app = {
         goal: $("#goal"),
         target_sum: $("#target_sum"),
         roi_period: $("#roi_period"),
-        reinvest_period: $("#reinvest_period"),
+        reinvesting_strategy: $("#reinvesting_strategy"),
         options: $('input[name="goal-options"]:checked'),
-        max_reinvesting_days: $('#max_reinvesting_days')
+        investing_target: $('#investing_target')
     },
     ui:{
         results_table: $("#results_table"),
@@ -221,18 +221,37 @@ var app = {
 
         if (option == 3){
             var target_reached = 0;
-            var reinvesting_amount = parseInt(app.user_input.reinvest_period.attr("data-val"));
-            var max_days = app.user_input.max_reinvesting_days.val() ? parseInt(app.user_input.max_reinvesting_days.val()) : -1;
+            var reinvesting_amount = parseInt(app.user_input.reinvesting_strategy.attr("data-val"));
+            var investing_target = app.user_input.investing_target.val() ? parseInt(app.user_input.investing_target.val()) : -1;
             var sum = 0;
             var sum_roi = 0;
             var loans = 0;
-            for (var i=1;i<days+1;i++){
+            for (var i=1;parseFloat(a[i-1][1])<investing_target;i++){
                 // var sum = parseFloat(a[i-1][3]);;
                 var prev_investment = parseFloat(a[i-1][1]);
                 var day_roi = prev_investment * interest;
                 sum_roi += day_roi;
                 sum += day_roi;
-                if (max_days == 0){
+
+                if (!reinvesting_amount){
+                    a.push([
+                        moment(app.data.start_date).add(i+1,'days'),
+                        parseFloat(prev_investment + sum).toFixed(2),
+                        sum_roi.toFixed(2),
+                        sum_roi.toFixed(2)
+                    ])
+                    sum = 0;
+                    sum_roi = 0;
+                } else if (reinvesting_amount <= sum){
+                    a.push([
+                        moment(app.data.start_date).add(i+1,'days'),
+                        parseFloat(prev_investment + sum).toFixed(2),
+                        sum_roi.toFixed(2),
+                        sum_roi.toFixed(2)
+                    ])
+                    sum = 0;
+                    sum_roi = 0;
+                } else {
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
                         parseFloat(prev_investment).toFixed(2),
@@ -240,38 +259,46 @@ var app = {
                         sum_roi.toFixed(2)
                     ])
                 }
-                if ((reinvesting_amount !=0 && max_days ==-1) || max_days > 0){
-                    if (sum>=reinvesting_amount){
-                        a.push([
-                            moment(app.data.start_date).add(i+1,'days'),
-                            parseFloat(prev_investment + sum).toFixed(2),
-                            sum.toFixed(2),
-                            sum_roi.toFixed(2)
-                        ]);
-                        loans++;
-                        sum = 0;
-                        sum_roi = 0;
-                        if (max_days!=-1)
-                            max_days--;
-                    } else {
-                        a.push([
-                            moment(app.data.start_date).add(i+1,'days'),
-                            parseFloat(prev_investment).toFixed(2),
-                            0,
-                            sum_roi.toFixed(2)
-                        ]);
-                    }
-                }
-                if (reinvesting_amount == 0 && max_days == -1){
-                    a.push([
-                        moment(app.data.start_date).add(i+1,'days'),
-                        parseFloat(prev_investment + day_roi).toFixed(2),
-                        day_roi.toFixed(2),
-                        day_roi.toFixed(2)
-                    ])
-                    loans ++;
-                    // max_days--;
-                }
+
+                // if (investing_target == 0){
+                //     a.push([
+                //         moment(app.data.start_date).add(i+1,'days'),
+                //         parseFloat(prev_investment).toFixed(2),
+                //         0,
+                //         sum_roi.toFixed(2)
+                //     ])
+                // }
+                // if ((reinvesting_amount !=0 && max_days ==-1) || max_days > 0){
+                //     if (sum>=reinvesting_amount){
+                //         a.push([
+                //             moment(app.data.start_date).add(i+1,'days'),
+                //             parseFloat(prev_investment + sum).toFixed(2),
+                //             sum.toFixed(2),
+                //             sum_roi.toFixed(2)
+                //         ]);
+                //         loans++;
+                //         sum = 0;
+                //         sum_roi = 0;
+                //         if (max_days!=-1)
+                //             max_days--;
+                //     } else {
+                //         a.push([
+                //             moment(app.data.start_date).add(i+1,'days'),
+                //             parseFloat(prev_investment).toFixed(2),
+                //             0,
+                //             sum_roi.toFixed(2)
+                //         ]);
+                //     }
+                // }
+                // if (reinvesting_amount == 0 && max_days == -1){
+                //     a.push([
+                //         moment(app.data.start_date).add(i+1,'days'),
+                //         parseFloat(prev_investment + day_roi).toFixed(2),
+                //         day_roi.toFixed(2),
+                //         day_roi.toFixed(2)
+                //     ])
+                //     loans ++;
+                // }
                 
             }
             

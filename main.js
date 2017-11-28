@@ -16,7 +16,7 @@ var app = {
     },
     toggle_view:function(e){
         $('.details').toggle({duration:300,easing:'linear'});
-        e.innerHTML = e.innerHTML == 'Show All' ? 'Filter Investments' : 'Show All'
+        e.innerHTML = e.innerHTML == 'Show All' ? 'Show Investments' : 'Show All'
     },
     get_interest:function(i){
         if (i<=1010)
@@ -156,27 +156,14 @@ var app = {
 
             
             if (target_reached){
-                var summary_two = `
-                <tr class="reinvest">   
-                    <td colspan=2>
-                        <div id="show_investment" class="center-text bold-font">
-                        Daily lending for
-                        ${target_reached} days
-                        <br/> 
-                        From ${moment(app.data.start_date).format("MMM Do YYYY")} To 
-                        ${moment(app.data.start_date).add(target_reached,'days').format("MMM Do YYYY")}
-                        <br/>
-                        $${a[target_reached][1]} in Lendings
-                        </div>
-                    </td>
-                </tr>`;
+                var summary_two = ``;
                 let selected_period = parseInt(app.user_input.roi_period.attr("data-val"));
                 goal_reached = `
                 <tr>   
                     <td>
                        <span class="mdl-data-table__cell--non-numeric">Goal reached in : </span>
                     </td>
-                    <td><span class="left-text bold-font">${target_reached} days (from starting date)</span>
+                    <td><span class="left-text bold-font">${target_reached} days</span>
                     </td>
                 </tr>
                 <tr>
@@ -186,7 +173,7 @@ var app = {
                     <td>
                         <span class="left-text bold-font">
                             ${moment(app.data.start_date)
-                            .add(target_reached,'days')
+                            .add(target_reached+1,'days')
                             .format("MMM Do YYYY")}
                         </span>
                     </td>
@@ -200,7 +187,20 @@ var app = {
                             $${a[target_reached][3]}
                         </span>
                         </td>
-                </tr>`;
+                </tr>
+                <tr>
+                    <td>
+                        <span class="mdl-data-table__cell--non-numeric">Lending period :</span>        
+                    </td>
+                    <td>
+                        <span class="left-text bold-font">
+                        ${moment(app.data.start_date).format("MMM Do YYYY")} - 
+                        ${moment(app.data.start_date).add(loans ? loans+1 : 0,'days').format("MMM Do YYYY")} 
+                        (${loans} days) 
+                        </span>
+                        </td>
+                </tr>
+                `;
             }
             if (!target_reached){
                 var summary_two = `
@@ -215,8 +215,6 @@ var app = {
 
             }
 
-            // app.ui.roi.html(`$${(p * (1 + (days / 100))).toFixed(2)}`);
-            // app.ui.roii.html(`$${(p + p * (1 + (days / 100))).toFixed(2)}`);
         }
 
         if (option == 3){
@@ -226,6 +224,7 @@ var app = {
             var sum = 0;
             var sum_roi = 0;
             var loans = 0;
+            var reinvestments = 0;
             for (var i=1;parseFloat(a[i-1][1])<investing_target;i++){
                 // var sum = parseFloat(a[i-1][3]);;
                 var prev_investment = parseFloat(a[i-1][1]);
@@ -242,6 +241,7 @@ var app = {
                     ])
                     sum = 0;
                     sum_roi = 0;
+                    reinvestments++;
                 } else if (reinvesting_amount <= sum){
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
@@ -251,6 +251,7 @@ var app = {
                     ])
                     sum = 0;
                     sum_roi = 0;
+                    reinvestments++
                 } else {
                     a.push([
                         moment(app.data.start_date).add(i+1,'days'),
@@ -259,46 +260,6 @@ var app = {
                         sum_roi.toFixed(2)
                     ])
                 }
-
-                // if (investing_target == 0){
-                //     a.push([
-                //         moment(app.data.start_date).add(i+1,'days'),
-                //         parseFloat(prev_investment).toFixed(2),
-                //         0,
-                //         sum_roi.toFixed(2)
-                //     ])
-                // }
-                // if ((reinvesting_amount !=0 && max_days ==-1) || max_days > 0){
-                //     if (sum>=reinvesting_amount){
-                //         a.push([
-                //             moment(app.data.start_date).add(i+1,'days'),
-                //             parseFloat(prev_investment + sum).toFixed(2),
-                //             sum.toFixed(2),
-                //             sum_roi.toFixed(2)
-                //         ]);
-                //         loans++;
-                //         sum = 0;
-                //         sum_roi = 0;
-                //         if (max_days!=-1)
-                //             max_days--;
-                //     } else {
-                //         a.push([
-                //             moment(app.data.start_date).add(i+1,'days'),
-                //             parseFloat(prev_investment).toFixed(2),
-                //             0,
-                //             sum_roi.toFixed(2)
-                //         ]);
-                //     }
-                // }
-                // if (reinvesting_amount == 0 && max_days == -1){
-                //     a.push([
-                //         moment(app.data.start_date).add(i+1,'days'),
-                //         parseFloat(prev_investment + day_roi).toFixed(2),
-                //         day_roi.toFixed(2),
-                //         day_roi.toFixed(2)
-                //     ])
-                //     loans ++;
-                // }
                 
             }
             
@@ -307,27 +268,22 @@ var app = {
             roii = (parseFloat(roi) + p).toFixed(2);
 
             summary_one = `
-            <tr>
-            <td>
-                <span class="mdl-data-table__cell--non-numeric">Lending Period:&nbsp;</span>
-            </td>
-            <td> 
-                <span id="end_date" class="left-text bold-font">
-                ${days} days - 
-                ${moment(app.data.start_date).format("MMM Do YYYY")} - 
-                ${moment(app.data.start_date).add(days,'days').format("MMM Do YYYY")}
-                </span>
-            </td>
-        </tr>
-            <tr>
+            <tr>   
                 <td>
-                    <span class="mdl-data-table__cell--non-numeric">Profit :&nbsp;</span>
+                <span class="mdl-data-table__cell--non-numeric">Goal reached on : </span>
                 </td>
-                <td>
-                    <span id="roi" class="left-text bold-font">$${roi}
-                    </span>
+                <td><span class="left-text bold-font">${moment(a[a.length-1][0]).format("MMM Do YYYY")} in ${a.length-1} days</span>
                 </td>
             </tr>
+            
+            <tr>   
+                <td>
+                <span class="mdl-data-table__cell--non-numeric">Number of reinvestments : </span>
+                </td>
+                <td><span class="left-text bold-font">${reinvestments}</span>
+                </td>
+            </tr>
+            
             `;  
 
         }

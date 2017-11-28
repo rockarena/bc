@@ -127,3 +127,16 @@ label.demo-list-radio.mdl-radio{
 .u-hover-ball-effect:hover:before, .c-datepicker__day-body:hover:before, .c-datepicker__clock__num:hover:before{
     background: #d46d00
 }
+
+.banner{
+    position: fixed;
+    top:0;
+    right:0;
+    margin:50px;;
+}
+
+.main-title{
+    text-shadow: 0.5px 1px 1px #5d5d5d;
+    font-size: 40px;
+    font-weight: bold;
+}

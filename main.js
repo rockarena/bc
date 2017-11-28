@@ -391,6 +391,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var el = document.querySelector('.c-datepicker-btn')
     el.addEventListener('click', () => picker.open()); 
     console.log("wellcome :)");
+
+    
 });
+
+function gotobitconnect(){
+    window.location = 'https://bitconnect.co/?ref=rockarena';
+}
 
 

@@ -137,6 +137,48 @@ label.demo-list-radio.mdl-radio{
 
 .main-title{
     text-shadow: 0.5px 1px 1px #5d5d5d;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: bold;
+    
+}
+
+.main{
+    
+    background-image: url('title-image1.png');
+    width:512px;
+    height:262px;
+}
+.percent{
+    background-image: url('1pp.png');
+    background-repeat: no-repeat;   
+    width:400px;
+    height:245px;
+    background-size:400px;
+    top:0;
+    position: fixed;
+    right:0;
+    margin:30px;
+    cursor: pointer;
+}
+.sign-up{
+    position: absolute;
+    top:245px;
+    right:0;
+    display: inline-block;
+    margin: 5px;
+    border: 1px solid #d8d8d8;
+    border-radius: 20px;
+    min-width: 100px;
+    min-height: 35px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    line-height: 2.2em;
+    cursor: pointer;
+}
+.sign-me-up{
+    float: right;
+    margin: 10px;
+    color: white;
+    text-decoration: none;
 }

@@ -40,16 +40,22 @@ gulp.task('js', function () {
 
 /*==========  Minify and concat different styles files  ==========*/
 
-var mainCssFilter = filter(['**','!main.css'], { restore: true });
+var mainCssFilter = filter(['main.css'], { restore: true });
 
 // SASS Version
 gulp.task('styles', function () {
-    return gulp.src('app/css/**/*.css')
+    return gulp.src([
+        'app/css/css.css',
+        'app/css/getmdl-select.min.css',
+        'app/css/icon.css',
+        'app/css/material-datetime-picker.css',
+        'app/css/material.indigo-pink.min.css',
+        'app/css/material.min.css',
+        'app/css/main.css',
+    ])
     // .pipe(sass())
-    .pipe(mainCssFilter)
     .pipe(prefix('last 2 versions'))
     .pipe(concat('styles.css'))
-    .pipe(mainCssFilter.restore)
     .pipe(minifyCSS())
     // .pipe(clean({ force: true }))
     .pipe(gulp.dest('public/css'))

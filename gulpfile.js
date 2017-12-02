@@ -38,6 +38,15 @@ gulp.task('js', function () {
     .pipe(gulp.dest('public/js'))
 });
 
+gulp.task('copyImages', function () {
+    gulp.src('app/images/**/*')
+        .pipe(gulp.dest('public/images/'));
+});
+gulp.task('copyIndex', function () {
+    gulp.src('app/index.html')
+        .pipe(gulp.dest('public/'));
+});
+
 /*==========  Minify and concat different styles files  ==========*/
 
 var mainCssFilter = filter(['main.css'], { restore: true });
@@ -86,10 +95,15 @@ gulp.task('styles', function(){
 gulp.task('default', function () {
     gulp.run('styles')
     gulp.run('js')
+    gulp.run('copyIndex')
+    gulp.run('copyImages')
     gulp.watch('app/css/**/*.css', function () {
         gulp.run('styles')
     })
     gulp.watch('app/js/**/*.css', function () {
         gulp.run('js')
+    })
+    gulp.watch('app/images/**/*', function () {
+        gulp.run('copyImages')
     })
 });

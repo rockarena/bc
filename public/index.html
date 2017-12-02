@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BitConnect Calculator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="percent" onclick="gotobitconnect()"></div> 
+        <!-- <button class="sign-up">Sign me up !</button>   -->
+    <!-- <a class="banner" href="https://bitconnect.co/?ref=rockarena"><img src="https://bitconnect.co/upload/image/banner/lending/BitConnect-lending-160X600.gif?v=98745478" /></a> -->
+    <div>
+        <div class="mdl-list">
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
+                <div class="main"><span class="sign-me-up">
+                    Hi, 
+                        <a href="https://bitconnect.co/?ref=rockarena" >Register to bitconnect </a></span>    
+                    </div> 
+                <div>
+                    <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Lending amount</th>
+                                <th>Interest - Daily</th>
+                                <th>Capital release</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric bold-font">$100 - $1000</td>
+                                <td>1% to 2%</td>
+                                <td>After <span class="bold-font">299</span> days</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric bold-font">$1,010 - $5,000</td>
+                                <td>1% to 2%<span class="bold-font"> + 0.10%</span></td>
+                                <td>After <span class="bold-font">239</span> days</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric bold-font">$5,010 - $10,000</td>
+                                <td>1% to 2%<span class="bold-font"> + 0.20%</span></td>
+                                <td>After <span class="bold-font">179</span> days</td>
+                            </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric bold-font">$10,010 - $100,000</td>
+                                <td>1% to 2%<span class="bold-font"> + 0.25%</span></td>
+                                <td>After <span class="bold-font">120</span> days</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="center-text">
+                    <!-- <a href="https://bitconnect.co/learning-center/bitconnect-bitcoin-price-volatility-software">
+                        daily interest history
+                    </a> -->
+                </div>
+                <div class="mdl-card__title mdl-card--expand">
+                    <div class="mdl-list center-list">
+                        <div class="mdl-list__item">
+                            <span class="mdl-card__title-text">Starting:&nbsp;</span>
+                            <span id="start_date" class="mdl-card__title-text">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <button class="c-datepicker-btn mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect">
+                        Choose Starting Date
+                    </button>
+                    <div class="mdl-layout-spacer"></div>
+                    <i class="material-icons">event</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="mdl-list">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Set your goal</h2></div>
+                <div class="margin-top-20">
+                    <span >
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investment">
+                            <label class="mdl-textfield__label" for="investment">Enter your first investment in $USD </label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                    </span>
+                    <div class="mdl-card__title" style="margin-left:-18px;"> <h2 class="mdl-card__title-text">Options</h2></div>
+                    <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+                        <input type="radio" id="list-option-1" class="radio mdl-radio__button" name="goal-options" value="1" checked />
+                        <span class="mdl-radio__label">No reinvesting</span>
+                    </label>
+                    <div class="getting-paid">
+                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-2" style="display:inline-block">
+                            <input type="radio" id="list-option-2" class="radio mdl-radio__button" name="goal-options" value="2" />
+                            <span class="mdl-radio__label">Daily / Weekly / Monthly - Payment</span>
+                        </label>  
+                        <div class="terms">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <div class="mdc-select" role="listbox" tabindex="0">
+                                    <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                                        <input class="mdl-textfield__input" type="text" id="roi_period" value="Weekly" data-val="7" readonly tabIndex="-1">
+                                        <label for="roi_period" class="mdl-textfield__label">select period:</label>
+                                        <ul for="roi_period" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                            <li class="mdl-menu__item" data-val="1">Daily</li>
+                                            <li class="mdl-menu__item" data-val="7">Weekly</li>
+                                            <li class="mdl-menu__item" data-val="30.42">Monthly</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield sum mdl-textfield--floating-label" >   
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="target_sum">
+                                <label class="mdl-textfield__label">$USD</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                        </div>
+                        
+                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-3" style="display:inline-block">
+                            <input type="radio" id="list-option-3" class="radio mdl-radio__button" name="goal-options" value="3" />
+                            <span class="mdl-radio__label">Reach investment target of</span>
+                        </label>  
+                        <div class="terms">
+                            <div class="mdl-textfield mdl-js-textfield sum2 mdl-textfield--floating-label" style="margin-top:10px" >   
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="investing_target">
+                                <label class="mdl-textfield__label">$USD</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield" style="margin-top:-20px">
+                                <div class="mdc-select" role="listbox" tabindex="0">
+                                    <!-- <span class="mdc-select__selected-text">Getting Paid </span> -->
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                                        <input class="mdl-textfield__input" type="text" id="reinvesting_strategy" value="Daily" data-val="0" readonly tabIndex="-1">
+                                        <label for="reinvesting_strategy" class="mdl-textfield__label">choose reinvestment strategy:</label>
+                                        <ul for="reinvesting_strategy" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                                            <li class="mdl-menu__item" data-val="0">Daily</li>
+                                            <li class="mdl-menu__item" data-val="1010">$1010</li>
+                                            <li class="mdl-menu__item" data-val="5010">$5010</li>
+                                            <li class="mdl-menu__item" data-val="10010">$10010</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>    
+
+                        </div>
+
+                        <br/>
+                        <br/>
+                        
+                    </div>
+                    <div class="center-text mdl-cell mdl-cell--12-col" style="padding-bottom:40px">
+                        <br/>
+                        <br/>
+                        <button onclick="app.show_results();" style="position:relative;bottom:0;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+                            Show Results <i class="material-icons md-24">navigate_next</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<div id="results_table" style="display:none">
+    <div class="mdl-list">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp center-list">
+            <div class="">
+                <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Result summary</h2></div>
+            </div>
+            
+            <table class="mdl-data-table" style="width:100%">
+                <tbody id="summary_table">
+                    
+                </tbody>
+            </table>
+            
+            <div class="mdl-card__supporting-text">
+                <div class="mdl-card__title"> <h2 class="mdl-card__title-text">Result details</h2></div>
+            </div>
+            <div class="snippet-demo-container demo-button demo-button__raised" style="padding:10px">
+                <button class="mdl-button mdl-js-button mdl-button--raised filter-results" id='show_results_btn' onclick="app.toggle_view(this)">
+                    Show Investments
+                </button>
+            </div>
+            <table class="mdl-data-table mdl-js-data-table" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th class="mdl-data-table__cell--non-numeric">Date</th>
+                        <th>Lending</th>
+                        <th>Reinvest</th>
+                        <th>Profit</th>
+                    </tr>
+                </thead>
+                <tbody id="results_table_body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="js/build.js" type="text/javascript"></script>
+</body>
+</html>
